@@ -23,7 +23,8 @@ def sort(nums):
 # print("a",' b',' c') -> output = a b c
 # print("a",' b',' c',sep = '/') -> output = a/ b/ c
 
-nums = [5, 3, 8, 6, 7, 2]
-sort(nums)
 
-print(nums,"<- 最後排完的樣子")
+numbers= [4,10,14,11,17,8,13,15,12,2,6,9]
+sort(numbers)
+
+print(numbers,"<- 最後排完的樣子")
