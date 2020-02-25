@@ -1,12 +1,23 @@
-#內部小迴圈
-#012345  ---> 極端狀況1  p最大, i一直往右,最後i與p同位置,處置?
-#543210  ---> 極端狀況2  p最小, j一直往左,最後j與i交叉,處置?
-#23   ---> 極端狀況3  i,j同位, p比ij大,處置?
-#32   ---> 極端狀況4  i,j同位, p比ij小,處置?
-#一般狀況 --> 找到i比p大,找到j比p小,對調..繼續做,直到ji 交叉,對調ip或是 j+1跟p對調
-#012356784 -> i跑到5,j跑到3,交叉,對調ip或是 j+1跟p對調
-
-#[   4  10  14  11  17   8  13  15  12   2   6   9]
+#        [   4  10  14  11  17   8  13  15  12   2   6   9]
+# 這好像是種變種的 quick Sort寫法..
+# 第一步 把最右邊的 9放入 pivot, 接下來可以看成這樣 11位置 空出來
+#        [   4  10  14  11  17   8  13  15  12   2   6    ?]
+#                i--------------------------------------->
+#        [   4   ?  14  11  17   8  13  15  12   2   6   10]
+#                <-----------------------------------j
+#        [   4   6  14  11  17   8  13  15  12   2   ?   10]
+#                    i------------------------------>
+#        [   4   6   ?  11  17   8  13  15  12   2   14  10]
+#                     <--------------------------j
+#        [   4   6   2  11  17   8  13  15  12   ?   14  10]
+#                        i---------------------->
+#        [   4   6   2   ?  17   8  13  15  12   11  14  10]
+#                         <------j
+#        [   4   6   2   8  17  ?   13  15  12   ?   14  10]
+#                            i->
+#        [   4   6   2   8  ?  17  13   15  12   11  14  10]
+#                           p
+#        [   4   6   2   8  9  17  13   15  12   11  14  10]
 def quick_Sort(tmpList,lft,rgt):
     print(tmpList,'  處理', lft,' ~ ', rgt,' <-new ')
     if lft>=rgt:
@@ -18,16 +29,16 @@ def quick_Sort(tmpList,lft,rgt):
         # pivot 設定在最尾,這段必須先寫, 若 pivot 設在最頭,則此段後寫
         while low <high and tmpList[low] < pivot:
             low += 1
-        print(tmpList[high],tmpList[low], ' before1')
+        print(tmpList[high],tmpList[low], ' 準備做 low copy 到 high')
         tmpList[high] = tmpList[low]
-        print(tmpList[high], tmpList[low], '   after1')
+        print(tmpList[high], tmpList[low], ' 做完')
         print(tmpList,'<--1')
         # pivot 設定在最尾,這段必須後寫, 若 pivot 設在最頭,則此段先寫
         while low < high and tmpList[high] >= pivot:
             high -= 1
-        print(tmpList[high], tmpList[low], ' before2')
+        print(tmpList[high], tmpList[low], ' 準備做 high copy 到 low')
         tmpList[low] = tmpList[high]
-        print(tmpList[high], tmpList[low], '   after2')
+        print(tmpList[high], tmpList[low], ' 做完')
         print(tmpList,'<--2')
     print('位置',low,rgt, '對調,  已完成位置:',low)
     tmpList[low] = pivot
@@ -36,6 +47,7 @@ def quick_Sort(tmpList,lft,rgt):
     quick_Sort(tmpList, low+1, rgt)
 
 numbers= [4,10,14,11,17,8,13,15,12,2,6,9]
+#numbers= [11,10,9,8,7,6,5,4,3,2,1,0]
 
 print(numbers,'<--原始')
 quick_Sort(numbers,0,len(numbers)-1)
