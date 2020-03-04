@@ -1,6 +1,5 @@
-# Selection Sort...在數列中 找出最小. 然後 第一輪跟第1個交換, 第二輪跟第二個交換
-# 所以n數走過 n 輪就會做完
-
+# Selection Sort...在數列中 找出最小. 走一遍,找出 最小值交換, 第二遍,找次小值...
+# 所以n個數 就會走n遍, 速度上是 O(n^2), 空間上 沒額外使用空間
 
 numbers= [4,10,14,11,17,8,13,15,12,2,6,9]
 
@@ -8,16 +7,17 @@ def swap (numbers,n,m):
     tmp = numbers[n]
     numbers[n]=numbers[m]
     numbers[m]=tmp
-    print(numbers)
+    print('     ',numbers)
 
 numberLen=len(numbers)
-print(numbers)
+print('原始:',numbers)
 
-for n in range(numberLen-1):
+for n in range(int(numberLen/2)):
     minNum=n
+    maxNum=n
     for m in range(n+1,numberLen):
         if numbers[minNum]>numbers[m]:
             minNum=m
     if minNum!=n:
-        print('Swap',n,minNum)
+        print('Min Swap',n,minNum)
         swap(numbers,n,minNum)
