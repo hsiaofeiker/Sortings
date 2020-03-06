@@ -19,12 +19,14 @@ def swap (numbers,n,m):
     numbers[m]=tmp
     #print(numbers)
 
-numbers= [4,10,14,11,17,8,13,15,12,2,6,9]
+#numbers= [4,10,14,11,17,8,13,15,12,2,6,9]
+numbers= [2,20,30,40,50,60,70,80,90,101]
 #numbers= [26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2]
 #numbers= [27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3 ]
 maxN=max(numbers)   #得到數列中的最大值
 minN=min(numbers)   #得到數列中的最小值
-bucketsN=round(math.sqrt(len(numbers))) #依照 開耕號的方式後4捨5入 來算出 需要幾個籃子
+
+bucketsN=round(math.sqrt(maxN-minN+1)) #依照 開耕號的方式後4捨5入 來算出 需要幾個籃子
 baseN=(maxN-minN+1)/bucketsN            #下個籃子離這個籃子的距離, 也就是 每個籃子有多寬
 
 print('原數組:', numbers)
